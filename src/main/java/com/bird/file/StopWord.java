@@ -17,7 +17,7 @@ public class StopWord {
 		HashSet<String> stopWordSet = new HashSet<String>();
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(new File(
-					"./stopword.txt")));
+					"stopword.txt")));
 			String stopWord = null;
 			while ((stopWord = reader.readLine()) != null) {
 				stopWordSet.add(stopWord);
@@ -26,7 +26,7 @@ public class StopWord {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return stopWordSet;
 	}
 
 	public static void main(String[] args) {
