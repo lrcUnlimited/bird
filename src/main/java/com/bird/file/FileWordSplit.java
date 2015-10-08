@@ -3,6 +3,7 @@ package com.bird.file;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import com.bird.module.FileNode;
@@ -13,6 +14,7 @@ import com.huaban.analysis.jieba.SegToken;
 
 public class FileWordSplit {
 	private static JiebaSegmenter jiebaSegmenter = new JiebaSegmenter();
+	private static HashSet<String> stopWordSet = StopWord.getStopWordSet();
 
 	/**
 	 * 对一篇文章完成分词操作
@@ -29,11 +31,13 @@ public class FileWordSplit {
 		String splitWord = null;
 		for (SegToken segToken : list) {
 			splitWord = segToken.word;
-			if (fileWordHash.containsKey(splitWord)) {
-				int count = fileWordHash.get(splitWord);
-				fileWordHash.put(splitWord, count++);
-			} else {
-				fileWordHash.put(splitWord, 1);
+			if (!stopWordSet.contains(splitWord)) {
+				if (fileWordHash.containsKey(splitWord)) {
+					int count = fileWordHash.get(splitWord);
+					fileWordHash.put(splitWord, count++);
+				} else {
+					fileWordHash.put(splitWord, 1);
+				}
 			}
 		}
 		fileNodeHash.setWordHash(fileWordHash);
