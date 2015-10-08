@@ -14,13 +14,19 @@ public class StopWord {
 	 * @return
 	 */
 	public static HashSet<String> getStopWordSet() {
+		// 读取resource下的停词列表
+		ClassLoader classLoader = StopWord.class.getClassLoader();
+		File file = new File(classLoader.getResource("stopword.txt").getFile());
 		HashSet<String> stopWordSet = new HashSet<String>();
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(new File(
-					"stopword.txt")));
+			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String stopWord = null;
 			while ((stopWord = reader.readLine()) != null) {
-				stopWordSet.add(stopWord);
+				if (stopWord.contains(stopWord)) {
+					System.out.println(stopWord);
+				} else {
+					stopWordSet.add(stopWord);
+				}
 			}
 			return stopWordSet;
 		} catch (IOException e) {
@@ -28,9 +34,4 @@ public class StopWord {
 		}
 		return stopWordSet;
 	}
-
-	public static void main(String[] args) {
-		StopWord.getStopWordSet();
-	}
-
 }
