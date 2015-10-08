@@ -22,9 +22,7 @@ public class StopWord {
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String stopWord = null;
 			while ((stopWord = reader.readLine()) != null) {
-				if (stopWord.contains(stopWord)) {
-					System.out.println(stopWord);
-				} else {
+				if (!stopWord.contains(stopWord)) {
 					stopWordSet.add(stopWord);
 				}
 			}

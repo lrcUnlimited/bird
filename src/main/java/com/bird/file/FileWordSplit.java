@@ -54,8 +54,24 @@ public class FileWordSplit {
 		return fileNodeHashs;
 	}
 
+	public static List<String> getSearchResult(String keyWord) {
+		long start = System.currentTimeMillis();
+		List<FileNodeHash> fileNodeHashs = getFilesHashList(new File("D:\\news"));
+		List<String> resultFileNames = new ArrayList<String>();
+		for (FileNodeHash fileNodeHash : fileNodeHashs) {
+			if (fileNodeHash.getWordHash().containsKey(keyWord)) {
+				resultFileNames.add(fileNodeHash.getFileName()
+						+ fileNodeHash.getWordHash().get(keyWord));
+			}
+		}
+		long end = System.currentTimeMillis();
+		System.out.println("查询时间为:" + (end - start));
+		return resultFileNames;
+
+	}
+
 	public static void main(String[] args) {
-		FileWordSplit.getFilesHashList(new File("D:\news"));
+		System.out.println(getSearchResult("国家"));
 	}
 
 }
