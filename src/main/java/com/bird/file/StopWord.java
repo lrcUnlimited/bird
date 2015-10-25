@@ -22,14 +22,16 @@ public class StopWord {
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String stopWord = null;
 			while ((stopWord = reader.readLine()) != null) {
-				if (!stopWord.contains(stopWord)) {
-					stopWordSet.add(stopWord);
-				}
+				stopWordSet.add(stopWord);
 			}
 			return stopWordSet;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return stopWordSet;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(StopWord.getStopWordSet().size());
 	}
 }

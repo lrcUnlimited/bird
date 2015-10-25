@@ -32,6 +32,7 @@ public class FileOperate {
 				StringBuffer buffer = new StringBuffer();
 				String fileLine = null;
 				while ((fileLine = reader.readLine()) != null) {
+					fileLine = fileLine.replaceAll("[\\p{C}\\p{Z}]", "");// 去除不可见字符，以及空格
 					buffer.append(fileLine);
 				}
 				FileNode fileNode = new FileNode();
@@ -54,4 +55,12 @@ public class FileOperate {
 		}
 	}
 
+	public static void main(String[] args) {
+		FileOperate.readFileContent(new File("D:\\test"));
+		for (FileNode fileNode : FileOperate.list) {
+			System.out.println(fileNode.getFileName() + " | "
+					+ fileNode.getFileContent());
+		}
+
+	}
 }
